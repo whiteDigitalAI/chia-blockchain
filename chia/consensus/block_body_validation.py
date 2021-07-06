@@ -27,6 +27,7 @@ from chia.types.full_block import FullBlock
 from chia.types.generator_types import BlockGenerator
 from chia.types.name_puzzle_condition import NPC
 from chia.types.unfinished_block import UnfinishedBlock
+from chia.util import cached_bls
 from chia.util.condition_tools import (
     pkm_pairs_for_conditions_dict,
     coin_announcements_names_for_npc,
@@ -478,7 +479,7 @@ async def validate_block_body(
             return Err.BAD_AGGREGATE_SIGNATURE, None
 
         # noinspection PyTypeChecker
-        if not AugSchemeMPL.aggregate_verify(pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature):
+        if not cached_bls.aggregate_verify(pairs_pks, pairs_msgs, block.transactions_info.aggregated_signature):
             return Err.BAD_AGGREGATE_SIGNATURE, None
 
         return None, npc_result
