@@ -17,7 +17,7 @@ def spend_bundle_to_serialized_coin_solution_entry_list(bundle: SpendBundle) -> 
     r = b""
     for coin_solution in bundle.coin_solutions:
         r += b"\xff"
-        r += b"\xff" + SExp.to(coin_solution.coin.parent_coin_info).as_bin()
+        r += b"\xff" + SExp.to(coin_solution.coin.parent_coin_id).as_bin()
         r += b"\xff" + bytes(coin_solution.puzzle_reveal)
         r += b"\xff" + SExp.to(coin_solution.coin.amount).as_bin()
         r += b"\xff" + bytes(coin_solution.solution)
@@ -75,7 +75,7 @@ def compress_cse_puzzle(puzzle: SerializedProgram) -> Optional[bytes]:
 def compress_coin_solution(coin_solution: CoinSolution):
     compressed_puzzle = compress_cse_puzzle(coin_solution.puzzle_reveal)
     return [
-        [coin_solution.coin.parent_coin_info, coin_solution.coin.amount],
+        [coin_solution.coin.parent_coin_id, coin_solution.coin.amount],
         [compressed_puzzle, Program.from_bytes(bytes(coin_solution.solution))],
     ]
 
