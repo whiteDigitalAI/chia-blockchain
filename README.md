@@ -1,6 +1,6 @@
 # chia-blockchain
 
-![Alt text](https://www.chia.net/img/chia_logo.svg)
+![Alt text](https://www.whitedigital.ai/assets/images/logo.webp)
 
 | Current Release/main | Development Branch/dev |
 |         :---:          |          :---:         |
